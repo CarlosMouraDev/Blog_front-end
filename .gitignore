@@ -42,3 +42,5 @@ next-env.d.ts
 
 .vscode/*
 .prettierrc.json
+
+full-site-view
