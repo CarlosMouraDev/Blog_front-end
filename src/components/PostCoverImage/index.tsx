@@ -32,6 +32,7 @@ export default function PostCoverImage({
           'transition',
           imageProps.className,
         )}
+        priority
         {...imageProps}
       />
     </Link>
