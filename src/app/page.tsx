@@ -1,34 +1,59 @@
 import { Container } from '@/components/Container/intex';
+import { Header } from '@/components/Header';
 import { PostsList } from '@/components/PostsList';
 import { SpinLoader } from '@/components/SpinLoader';
-import { postRepository } from '@/repositories/post';
+import clsx from 'clsx';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Suspense } from 'react';
 
 export default async function HomePage() {
   return (
     <Container>
-      <header>
-        <h1 className='text-6xl font-bold text-center py-8'>Header</h1>
-        <p className='text-justify'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-          eveniet natus optio reprehenderit, necessitatibus mollitia sequi
-          tempore nulla maxime dignissimos itaque obcaecati at et ducimus fuga
-          nemo commodi cum? Officiis, ad quibusdam? Deleniti dolorum perferendis
-          laboriosam saepe aperiam in minus beatae odio consequuntur nostrum
-          natus eveniet consequatur maiores accusamus aliquid, a assumenda
-          adipisci. Consectetur aspernatur enim at, ut suscipit quibusdam beatae
-          nobis totam iste autem temporibus! Ratione qui iure velit distinctio,
-          provident voluptate non voluptatum corporis quam odio culpa? Nostrum
-          commodi similique autem nulla architecto molestiae ducimus facere! Nam
-          labore dolorum dolor fuga, eaque quod ipsum aperiam tempore ad dolore
-          odio, officia voluptate delectus, laboriosam nihil aliquid consequatur
-          corporis cum! Soluta est perspiciatis nisi sequi id autem voluptates?
-          Repellendus, rem provident. Repellendus consequuntur voluptatem sequi
-          libero recusandae iusto repellat dolorem. Quae exercitationem aliquam
-          illum. Quod earum molestiae exercitationem est et quae ex sapiente eum
-          quasi cumque tenetur, reiciendis nihil natus, impedit quos ipsum
-        </p>
-      </header>
+      <Header />
+
+      <section
+        className={clsx(
+          'grid',
+          'grid-cols-1',
+          'gap-8',
+          'mb-16',
+          'sm:grid-cols-2',
+          'group',
+        )}
+      >
+        <Link className='w-full h-full overflow-hidden rounded-xl ' href='#'>
+          <Image
+            className='w-full h-full object-cover object-center group-hover:scale-105 transition'
+            src='/images/bryen_0.png'
+            width={1200}
+            height={720}
+            alt='Post'
+            priority
+          />
+        </Link>
+        <div className='flex flex-col gap-4 sm:justify-center'>
+          <time
+            className='text-slate-600 block text-sm/tight'
+            dateTime='2025-08-05'
+          >
+            05/08/2025 15:00
+          </time>
+
+          <h1 className='text-2x1/tight font-extrabold sm:text-4xl'>
+            <Link href='#'>Lorem ipsum dolor sit</Link>
+          </h1>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+            maxime iste quos ut porro animi tempore saepe, voluptas iure ullam
+            at corrupti molestias alias harum dolorem id rerum expedita,
+            voluptates quasi maiores qui magnam aut tempora enim? Aspernatur,
+            vero possimus!
+          </p>
+        </div>
+      </section>
+
       <Suspense fallback={<SpinLoader />}>
         <PostsList />
       </Suspense>

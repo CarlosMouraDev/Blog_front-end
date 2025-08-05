@@ -1,5 +1,3 @@
-import { postRepository } from '@/repositories/post';
-
 type ContainerProps = {
   children: React.ReactNode;
 };
