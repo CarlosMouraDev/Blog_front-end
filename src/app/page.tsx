@@ -1,5 +1,6 @@
 import { Container } from '@/components/Container/intex';
 import { Header } from '@/components/Header';
+import { PostHeading } from '@/components/PostHeading';
 import { PostsList } from '@/components/PostsList';
 import { SpinLoader } from '@/components/SpinLoader';
 import clsx from 'clsx';
@@ -40,9 +41,9 @@ export default async function HomePage() {
             05/08/2025 15:00
           </time>
 
-          <h1 className='text-2x1/tight font-extrabold sm:text-4xl'>
-            <Link href='#'>Lorem ipsum dolor sit</Link>
-          </h1>
+          <PostHeading as='h1' url='#'>
+            Lorem ipsum dolor sit amet.
+          </PostHeading>
 
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
