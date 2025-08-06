@@ -8,11 +8,13 @@ export async function PostsList() {
   return (
     <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3'>
       {posts.map(post => {
+        const postLink = `/post/${post.slug}`;
+
         return (
           <div key={post.id} className='flex flex-col group gap-4'>
             <PostCoverImage
               linkProps={{
-                href: `/post/${post.slug}`,
+                href: postLink,
               }}
               imageProps={{
                 width: 1200,
@@ -28,7 +30,7 @@ export async function PostsList() {
               {post.createdAt}
             </time>
 
-            <PostHeading as='h1' url='#'>
+            <PostHeading as='h1' url={postLink}>
               {post.title}
             </PostHeading>
 
