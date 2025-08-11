@@ -1,10 +1,8 @@
 import { Container } from '@/components/Container/intex';
+import FeaturedPost from '@/components/FeaturedPost';
 import { Header } from '@/components/Header';
-import PostCoverImage from '@/components/PostCoverImage';
-import { PostHeading } from '@/components/PostHeading';
 import { PostsList } from '@/components/PostsList';
 import { SpinLoader } from '@/components/SpinLoader';
-import clsx from 'clsx';
 import { Suspense } from 'react';
 
 export default async function HomePage() {
@@ -12,7 +10,7 @@ export default async function HomePage() {
     <Container>
       <Header />
       <Suspense fallback={<SpinLoader />}>
-        <PostsList />
+        <FeaturedPost />
       </Suspense>
       <Suspense fallback={<SpinLoader />}>
         <PostsList />

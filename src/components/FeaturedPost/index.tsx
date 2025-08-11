@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import PostCoverImage from '../PostCoverImage';
 import { PostHeading } from '../PostHeading';
+import { formatDatetime, formatRelativeDate } from '@/utils/format-datetime';
 
 export default function FeaturedPost() {
   const slug = 'placeholder';
@@ -33,9 +34,10 @@ export default function FeaturedPost() {
       <div className='flex flex-col gap-4 sm:justify-center'>
         <time
           className='text-slate-600 block text-sm/tight'
-          dateTime='2025-08-05'
+          dateTime={formatDatetime('2025-08-05')}
+          title={formatDatetime('2025-08-05')}
         >
-          05/08/2025 15:00
+          {formatRelativeDate('05/08/2025 15:00')}
         </time>
 
         <PostHeading as='h1' url='#'>
