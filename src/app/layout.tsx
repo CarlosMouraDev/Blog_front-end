@@ -1,4 +1,15 @@
+import { Container } from '@/components/Container/intex';
 import './globals.css';
+import { Header } from '@/components/Header';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'The blog - Feito com Next.js',
+    template: '%s | The blog',
+  },
+  description: 'Descrição da página.',
+};
 
 export default function RootLayout({
   children,
@@ -7,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='pt-BR'>
-      <body>{children}</body>
+      <Container>
+        <Header />
+        <body>{children}</body>
+      </Container>
     </html>
   );
 }
