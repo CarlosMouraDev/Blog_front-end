@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import PostCoverImage from '../PostCoverImage';
 import { PostHeading } from '../PostHeading';
 import { formatDatetime, formatRelativeDate } from '@/utils/format-datetime';
+import PostSummary from '../PostSummary';
 
 export default function FeaturedPost() {
   const slug = 'placeholder';
@@ -31,26 +32,16 @@ export default function FeaturedPost() {
           priority: true,
         }}
       />
-      <div className='flex flex-col gap-4 sm:justify-center'>
-        <time
-          className='text-slate-600 block text-sm/tight'
-          dateTime={formatDatetime('2025-08-05')}
-          title={formatDatetime('2025-08-05')}
-        >
-          {formatRelativeDate('05/08/2025 15:00')}
-        </time>
 
-        <PostHeading as='h1' url='#'>
-          Lorem ipsum dolor sit amet.
-        </PostHeading>
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus maxime
-          iste quos ut porro animi tempore saepe, voluptas iure ullam at
-          corrupti molestias alias harum dolorem id rerum expedita, voluptates
-          quasi maiores qui magnam aut tempora enim? Aspernatur, vero possimus!
-        </p>
-      </div>
+      <PostSummary
+        postLink={postLink}
+        postHeading={'h1'}
+        createdAt={'2025-04-12T06:31:23.411Z'}
+        excerpt={
+          'O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.'
+        }
+        title={'Rotina matinal de pessoas altamente eficazes'}
+      />
     </section>
   );
 }
