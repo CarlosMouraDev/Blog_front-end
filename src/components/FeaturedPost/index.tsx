@@ -1,10 +1,12 @@
 import clsx from 'clsx';
 import PostCoverImage from '../PostCoverImage';
-import { PostHeading } from '../PostHeading';
-import { formatDatetime, formatRelativeDate } from '@/utils/format-datetime';
 import PostSummary from '../PostSummary';
+import { findAllPublicPosts } from '@/lib/post/queries';
 
-export default function FeaturedPost() {
+export default async function FeaturedPost() {
+  const posts = await findAllPublicPosts();
+  const post = posts[0];
+
   const slug = 'placeholder';
 
   const postLink = `/post/${slug}`;
@@ -22,13 +24,13 @@ export default function FeaturedPost() {
     >
       <PostCoverImage
         linkProps={{
-          href: '#',
+          href: postLink,
         }}
         imageProps={{
           width: 1200,
           height: 720,
-          src: '/images/bryen_9.png',
-          alt: 'post image',
+          src: post.coverImageUrl,
+          alt: post.title,
           priority: true,
         }}
       />
@@ -36,11 +38,9 @@ export default function FeaturedPost() {
       <PostSummary
         postLink={postLink}
         postHeading={'h1'}
-        createdAt={'2025-04-12T06:31:23.411Z'}
-        excerpt={
-          'O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.'
-        }
-        title={'Rotina matinal de pessoas altamente eficazes'}
+        createdAt={post.createdAt}
+        excerpt={post.excerpt}
+        title={post.title}
       />
     </section>
   );
