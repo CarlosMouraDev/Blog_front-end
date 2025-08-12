@@ -23,6 +23,7 @@ export default function PostCoverImage({
       )}
     >
       <Image
+        {...imageProps}
         className={clsx(
           'w-full',
           'h-full',
@@ -32,8 +33,7 @@ export default function PostCoverImage({
           'transition',
           imageProps.className,
         )}
-        priority
-        {...imageProps}
+        alt={imageProps.alt}
       />
     </Link>
   );
