@@ -2,7 +2,7 @@ import { postRepository } from '@/repositories/post';
 import { notFound } from 'next/navigation';
 import { cache } from 'react';
 
-export const findAllPublicPosts = cache(
+export const findAllPublicPostsCashed = cache(
   async () => await postRepository.findAllPublic(),
 );
 
