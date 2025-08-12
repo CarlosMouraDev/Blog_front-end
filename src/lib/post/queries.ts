@@ -10,7 +10,7 @@ export const findPostBySlugCached = cache(async (slug: string) => {
   let post;
 
   try {
-    post = await postRepository.findBySlug(slug);
+    post = await postRepository.findBySlugPublic(slug);
   } catch {
     post = undefined;
   }
