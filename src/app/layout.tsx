@@ -18,10 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='pt-BR'>
-      <Container>
-        <Header />
-        <body>{children}</body>
-      </Container>
+      <body>
+        <Container>
+          <Header />
+          {children}
+        </Container>
+      </body>
     </html>
   );
 }

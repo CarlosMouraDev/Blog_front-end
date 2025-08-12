@@ -7,13 +7,9 @@ import { Suspense } from 'react';
 
 export default async function HomePage() {
   return (
-    <>
-      <Suspense fallback={<SpinLoader />}>
-        <FeaturedPost />
-      </Suspense>
-      <Suspense fallback={<SpinLoader />}>
-        <PostsList />
-      </Suspense>
-    </>
+    <Suspense fallback={<SpinLoader />}>
+      <FeaturedPost />
+      <PostsList />
+    </Suspense>
   );
 }
