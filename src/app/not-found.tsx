@@ -6,19 +6,13 @@ export default function NotFoundPage() {
       <title>Página não encontrada.</title>
       <div
         className={clsx(
-          'min-h[320px',
-          'bg-slate-900',
-          'text-slate-100',
-          'mb-16',
-          'p-8',
-          'rounded-xl',
-          'flex',
-          'items-center',
-          'justify-center',
+          'min-h-[320px] bg-slate-900 text-slate-100',
+          'mb-16 p-8 rounded-xl',
+          'flex items-center justify-center flex-col',
           'text-center',
         )}
       >
-        <h1 className='text-7x1/tight mb-4 font-extrabold'>404</h1>
+        <h1 className='text-7xl/tight mb-4 font-extrabold'>404</h1>
         <p>Erro 404 - A pagína que você está tentando acessar não existe.</p>
       </div>
     </>

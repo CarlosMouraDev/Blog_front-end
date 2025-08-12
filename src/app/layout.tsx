@@ -2,6 +2,7 @@ import { Container } from '@/components/Container/intex';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Metadata } from 'next';
+import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: {
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Container>
           <Header />
           {children}
+          <Footer />
         </Container>
       </body>
     </html>

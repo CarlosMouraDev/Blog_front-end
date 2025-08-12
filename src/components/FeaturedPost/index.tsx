@@ -7,7 +7,7 @@ export default async function FeaturedPost() {
   const posts = await findAllPublicPosts();
   const post = posts[0];
 
-  const slug = 'placeholder';
+  const slug = post.slug;
 
   const postLink = `/post/${slug}`;
 
