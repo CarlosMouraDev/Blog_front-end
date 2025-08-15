@@ -9,8 +9,15 @@ import { postsTable } from './schemas';
   try {
     await drizzleDb.delete(postsTable);
     await drizzleDb.insert(postsTable).values(posts);
-    console.log(`${posts.length} posts salvos`);
-  } catch (error) {
-    console.log(error);
+
+    console.log();
+    console.log(`${posts.length} posts foram salvos na base de dados.`);
+    console.log();
+  } catch (e) {
+    console.log();
+    console.log('Ocorreu um erro...');
+    console.log();
+    console.log(e);
+    console.log();
   }
 })();

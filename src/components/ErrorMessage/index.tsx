@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 
 type ErrorMessageProps = {
-  pageTitle: string;
+  pageTitle?: string;
   contentTitle: string;
   content: React.ReactNode;
 };

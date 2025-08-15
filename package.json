@@ -2,17 +2,20 @@
   "name": "blog",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "drizzle:seed": "node --loader ts-node/esm src/db/drizzle/seed.ts"
   },
   "dependencies": {
     "better-sqlite3": "^12.2.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.44.4",
+    "drizzle-seed": "^0.3.1",
     "next": "15.4.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
