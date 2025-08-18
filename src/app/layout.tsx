@@ -3,6 +3,7 @@ import './globals.css';
 import { Header } from '@/components/Header';
 import { Metadata } from 'next';
 import { Footer } from '@/components/Footer';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata: Metadata = {
   title: {
@@ -25,6 +26,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </Container>
+        <ToastContainer />
       </body>
     </html>
   );

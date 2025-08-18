@@ -7,8 +7,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "drizzle:seed": "node --loader ts-node/esm src/db/drizzle/seed.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "better-sqlite3": "^12.2.0",
@@ -21,6 +20,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-markdown": "^10.1.0",
+    "react-toastify": "^11.0.5",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1"
   },
