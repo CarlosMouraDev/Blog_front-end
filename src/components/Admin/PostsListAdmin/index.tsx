@@ -4,9 +4,20 @@ import clsx from 'clsx';
 import { Trash2Icon } from 'lucide-react';
 import Link from 'next/link';
 import DeletePostButton from '../DeletePostButton';
+import ErrorMessage from '@/components/ErrorMessage';
 
 export default async function PostsListAdmin() {
   const posts = await findAllPostAdmin();
+
+  if (posts.length <= 0) {
+    return (
+      <ErrorMessage
+        contentTitle='Ops 😅'
+        content='Ainda não criamos nenhum post.'
+      />
+    );
+  }
+
   return (
     <div className='mb-16'>
       {posts.map(post => {
