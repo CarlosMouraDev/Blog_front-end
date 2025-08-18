@@ -1,4 +1,4 @@
-import PostsListAdmin from '@/components/PostsListAdmin';
+import PostsListAdmin from '@/components/Admin/PostsListAdmin';
 import { SpinLoader } from '@/components/SpinLoader';
 import { findAllPostAdmin } from '@/lib/post/queries/admin';
 import { Metadata } from 'next';
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function AdminPostPage() {
   return (
-    <Suspense fallback={<SpinLoader />}>
+    <Suspense fallback={<SpinLoader containerClasses='mb-16' />}>
       <PostsListAdmin />
     </Suspense>
   );
