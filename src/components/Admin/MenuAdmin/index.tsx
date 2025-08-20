@@ -74,7 +74,7 @@ export function MenuAdmin() {
           </>
         )}
       </button>
-      <a href='/' target='_blank' className={linkClasses}>
+      <a href='/' className={linkClasses}>
         <HouseIcon />
         Home
       </a>
@@ -82,7 +82,7 @@ export function MenuAdmin() {
         <FileTextIcon />
         Posts
       </Link>
-      <Link className={linkClasses} href='/admin/post'>
+      <Link className={linkClasses} href='/admin/post/new'>
         <PlusIcon />
         Criar post
       </Link>
