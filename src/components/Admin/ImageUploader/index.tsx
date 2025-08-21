@@ -1,7 +1,7 @@
 import { uploadImageAction } from '@/actions/upload/upload-image-action';
 import Button from '@/components/Button';
 import { IMAGE_UPLOAD_MAX_SIZE } from '@/lib/constants';
-import { useRef, useTransition } from 'react';
+import { startTransition, useRef, useTransition } from 'react';
 import { toast } from 'react-toastify';
 
 export function ImageUploader() {
@@ -26,12 +26,22 @@ export function ImageUploader() {
       toast.error(
         `Imagem muito grande. O tamanho máximo é: ${readableMaxSize}KB.`,
       );
-      fileInput.value = ''; // Clear the input
+      fileInput.value = '';
       return;
     }
 
     const formData = new FormData();
     formData.append('file', file);
+
+    startTransition(async () => {
+      const result = await uploadImageAction();
+      if (result.error) {
+        toast.error(`Erro ao enviar imagem: ${result.error}`);
+        return;
+      }
+
+      toast.success(`Imagem enviada com sucesso: ${result.url}`);
+    });
 
     fileInput.value = '';
   }
