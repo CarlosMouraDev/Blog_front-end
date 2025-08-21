@@ -48,3 +48,5 @@ next-env.d.ts
 .prettierrc.json
 
 full-site-view
+
+uploads/

@@ -1,12 +1,13 @@
 import { uploadImageAction } from '@/actions/upload/upload-image-action';
 import Button from '@/components/Button';
 import { IMAGE_UPLOAD_MAX_SIZE } from '@/lib/constants';
-import { startTransition, useRef, useTransition } from 'react';
+import { startTransition, useRef, useState, useTransition } from 'react';
 import { toast } from 'react-toastify';
 
 export function ImageUploader() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useTransition();
+  const [imgUrl, setImgUrl] = useState('');
 
   function handleChooseFile() {
     if (!fileInputRef.current) return;
@@ -34,7 +35,7 @@ export function ImageUploader() {
     formData.append('file', file);
 
     startTransition(async () => {
-      const result = await uploadImageAction();
+      const result = await uploadImageAction(formData);
       if (result.error) {
         toast.error(`Erro ao enviar imagem: ${result.error}`);
         return;
