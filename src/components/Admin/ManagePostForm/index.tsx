@@ -6,8 +6,13 @@ import InputText from '@/components/InputText';
 import { MarkdownEditor } from '@/components/MarkDownEditor';
 import { useState } from 'react';
 import { ImageUploader } from '../ImageUploader';
+import { PublicPost } from '@/dto/post/dto';
 
-export function ManagePostForm() {
+type ManagePostFormProps = {
+  publicPost?: PublicPost;
+};
+
+export function ManagePostForm({ publicPost }: ManagePostFormProps) {
   const [contentValue, setContentValue] = useState('');
 
   return (
@@ -18,7 +23,7 @@ export function ManagePostForm() {
           name='id'
           placeholder='Id gerado automaticamente'
           type='text'
-          defaultValue={''}
+          defaultValue={publicPost?.id || ''}
           readOnly
         />
         <InputText
@@ -26,7 +31,7 @@ export function ManagePostForm() {
           placeholder='Slug gerada automaticamente'
           name='slug'
           type='text'
-          defaultValue={''}
+          defaultValue={publicPost?.slug || ''}
           readOnly
         />
 
@@ -35,7 +40,7 @@ export function ManagePostForm() {
           placeholder='Digite o nome do autor do post'
           name='author'
           type='text'
-          defaultValue={''}
+          defaultValue={publicPost?.author || ''}
         />
 
         <InputText
@@ -43,7 +48,7 @@ export function ManagePostForm() {
           placeholder='Digite o título do post'
           name='title'
           type='text'
-          defaultValue={''}
+          defaultValue={publicPost?.title || ''}
         />
 
         <InputText
@@ -51,7 +56,7 @@ export function ManagePostForm() {
           placeholder='Digite o resumo do post'
           name='excerpt'
           type='text'
-          defaultValue={''}
+          defaultValue={publicPost?.excerpt || ''}
         />
 
         <MarkdownEditor
@@ -69,10 +74,15 @@ export function ManagePostForm() {
           labelText='URL da imagem de capa'
           placeholder='Digite a URL da imagem de capa'
           type='text'
-          defaultValue={''}
+          defaultValue={publicPost?.coverImageUrl || ''}
         />
 
-        <InputCheckbox name='published' labelText='Publicar?' type='checkbox' />
+        <InputCheckbox
+          name='published'
+          labelText='Publicar?'
+          type='checkbox'
+          defaultChecked={publicPost?.published || false}
+        />
 
         <div className='mt-4'>
           <Button className='w-full' type='submit'>
