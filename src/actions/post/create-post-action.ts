@@ -1,6 +1,9 @@
 'use server';
 
 import { PublicPost } from '@/dto/post/dto';
+import { PostCreateSchema } from '@/lib/post/validations';
+import { PostModel } from '@/models/post/post-model';
+import { getZodErrorMessages } from '@/utils/get-zod-error-message';
 
 type createPostActionState = {
   formState: PublicPost;
@@ -18,10 +21,29 @@ export async function createPostAction(
     };
   }
 
-  const formDataObj = Object.fromEntries(formData.entries());
+  const formDataToObj = Object.fromEntries(formData.entries());
+  const zodParsedObj = PostCreateSchema.safeParse(formDataToObj);
+
+  if (!zodParsedObj.success) {
+    const errors = getZodErrorMessages(zodParsedObj.error.format());
+    return {
+      errors,
+      formState: prevState.formState,
+    };
+  }
+
+  const validPostData = zodParsedObj.data;
+
+  const newPost: PostModel = {
+    ...validPostData,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    id: Date.now().toString(),
+    slug: Math.random().toString(36),
+  };
 
   return {
-    formState: { ...prevState.formState },
+    formState: newPost,
     errors: [],
   };
 }
