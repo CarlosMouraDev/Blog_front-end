@@ -1,16 +1,16 @@
 'use client';
 
-import Button from '@/components/Button';
-import { InputCheckbox } from '@/components/InputCheckBox';
-import InputText from '@/components/InputText';
-import { MarkdownEditor } from '@/components/MarkDownEditor';
 import { useActionState, useEffect, useState } from 'react';
 import { ImageUploader } from '../ImageUploader';
 import { makePartialPublicPost, PublicPost } from '@/dto/post/dto';
 import { createPostAction } from '@/actions/post/create-post-action';
 import { toast } from 'react-toastify';
-import { updatePostAction } from '@/actions/post/update-post-action copy';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { updatePostAction } from '@/actions/post/update-post-action copy';
+import InputText from '@/components/InputText';
+import { MarkdownEditor } from '@/components/MarkDownEditor';
+import { InputCheckbox } from '@/components/InputCheckBox';
+import Button from '@/components/Button';
 
 type ManagePostFormUpdateProps = {
   mode: 'update';
@@ -22,8 +22,8 @@ type ManagePostFormCreateProps = {
 };
 
 type ManagePostFormProps =
-  | ManagePostFormCreateProps
-  | ManagePostFormUpdateProps;
+  | ManagePostFormUpdateProps
+  | ManagePostFormCreateProps;
 
 export function ManagePostForm(props: ManagePostFormProps) {
   const { mode } = props;
@@ -40,6 +40,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
     update: updatePostAction,
     create: createPostAction,
   };
+
   const initialState = {
     formState: makePartialPublicPost(publicPost),
     errors: [],
@@ -59,42 +60,22 @@ export function ManagePostForm(props: ManagePostFormProps) {
   useEffect(() => {
     if (state.success) {
       toast.dismiss();
-      toast.success('Post atualizado com sucesso.');
+      toast.success('Post atualizado com sucesso!');
     }
   }, [state.success]);
 
   useEffect(() => {
     if (created === '1') {
       toast.dismiss();
-      toast.success('Post criado com sucesso.');
+      toast.success('Post criado com sucesso!');
       const url = new URL(window.location.href);
-
       url.searchParams.delete('created');
       router.replace(url.toString());
     }
-  }, [created]);
+  }, [created, router]);
 
   const { formState } = state;
-
-  // Campos controlados
-  const [author, setAuthor] = useState(formState.author || '');
-  const [title, setTitle] = useState(formState.title || '');
-  const [excerpt, setExcerpt] = useState(formState.excerpt || '');
-  const [coverImageUrl, setCoverImageUrl] = useState(
-    formState.coverImageUrl || '',
-  );
-  const [published, setPublished] = useState(formState.published || false);
-  const [contentValue, setContentValue] = useState(formState.content || '');
-
-  // Atualiza campos controlados se formState mudar (ex: após submit)
-  useEffect(() => {
-    setAuthor(formState.author || '');
-    setTitle(formState.title || '');
-    setExcerpt(formState.excerpt || '');
-    setCoverImageUrl(formState.coverImageUrl || '');
-    setPublished(formState.published || false);
-    setContentValue(formState.content || '');
-  }, [formState]);
+  const [contentValue, setContentValue] = useState(publicPost?.content || '');
 
   return (
     <form action={action} className='mb-16'>
@@ -102,49 +83,47 @@ export function ManagePostForm(props: ManagePostFormProps) {
         <InputText
           labelText='ID'
           name='id'
-          placeholder='Id gerado automaticamente'
+          placeholder='ID gerado automaticamente'
           type='text'
-          value={formState.id}
+          defaultValue={formState.id}
           disabled={isPending}
           readOnly
         />
+
         <InputText
           labelText='Slug'
-          placeholder='Slug gerada automaticamente'
           name='slug'
+          placeholder='Slug gerada automaticamente'
           type='text'
-          value={formState.slug}
+          defaultValue={formState.slug}
           disabled={isPending}
           readOnly
         />
 
         <InputText
           labelText='Autor'
-          placeholder='Digite o nome do autor do post'
           name='author'
+          placeholder='Digite o nome do autor'
           type='text'
-          value={author}
-          onChange={e => setAuthor(e.target.value)}
+          defaultValue={formState.author}
           disabled={isPending}
         />
 
         <InputText
           labelText='Título'
-          placeholder='Digite o título do post'
           name='title'
+          placeholder='Digite o título'
           type='text'
-          value={title}
-          onChange={e => setTitle(e.target.value)}
+          defaultValue={formState.title}
           disabled={isPending}
         />
 
         <InputText
           labelText='Excerto'
-          placeholder='Digite o resumo do post'
           name='excerpt'
+          placeholder='Digite o resumo'
           type='text'
-          value={excerpt}
-          onChange={e => setExcerpt(e.target.value)}
+          defaultValue={formState.excerpt}
           disabled={isPending}
         />
 
@@ -159,26 +138,24 @@ export function ManagePostForm(props: ManagePostFormProps) {
         <ImageUploader disabled={isPending} />
 
         <InputText
-          name='coverImageUrl'
           labelText='URL da imagem de capa'
-          placeholder='Digite a URL da imagem de capa'
+          name='coverImageUrl'
+          placeholder='Digite a url da imagem'
           type='text'
-          value={coverImageUrl}
-          onChange={e => setCoverImageUrl(e.target.value)}
+          defaultValue={formState.coverImageUrl}
           disabled={isPending}
         />
 
         <InputCheckbox
-          name='published'
           labelText='Publicar?'
+          name='published'
           type='checkbox'
-          checked={published}
-          onChange={e => setPublished(e.target.checked)}
+          defaultChecked={formState.published}
           disabled={isPending}
         />
 
         <div className='mt-4'>
-          <Button disabled={isPending} className='w-full' type='submit'>
+          <Button disabled={isPending} type='submit'>
             Enviar
           </Button>
         </div>

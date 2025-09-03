@@ -1,5 +1,3 @@
-'use client';
-
 import { LoginForm } from '@/components/Admin/LoginForm';
 import ErrorMessage from '@/components/ErrorMessage';
 import { Metadata } from 'next';

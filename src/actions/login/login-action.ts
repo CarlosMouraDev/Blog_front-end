@@ -3,7 +3,6 @@
 import { createLoginSession } from '@/lib/login/manage-login';
 import { verifyPassword } from '@/lib/login/password-hashing';
 import { asyncDelay } from '@/utils/async-delay';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 type LoginActionState = {
@@ -12,7 +11,16 @@ type LoginActionState = {
 };
 
 export async function loginAction(state: LoginActionState, formData: FormData) {
-  await asyncDelay(5000);
+  const allowLogin = Boolean(Number(process.env.ALLOW_LOGIN));
+
+  if (!allowLogin) {
+    return {
+      username: '',
+      error: 'Login not allowed',
+    };
+  }
+
+  await asyncDelay(2000);
 
   if (!(formData instanceof FormData)) {
     return {
@@ -26,8 +34,8 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
 
   if (!username || !password) {
     return {
-      username: '',
-      password: '',
+      username,
+      error: 'Digite o usuário e a senha',
     };
   }
 
@@ -40,7 +48,7 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
   if (!isUsernameValid || !isPasswordValid) {
     return {
       username,
-      error: 'Usuário ou senha inválidos.',
+      error: 'Usuário ou senha inválidos',
     };
   }
 
