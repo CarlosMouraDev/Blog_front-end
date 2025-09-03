@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useId } from 'react';
+import { useId, useEffect, useState } from 'react';
 import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
 
@@ -25,6 +25,11 @@ export function MarkdownEditor({
   disabled = false,
 }: MarkdownEditorProps) {
   const id = useId();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div className='flex flex-col gap-2'>
@@ -34,27 +39,29 @@ export function MarkdownEditor({
         </label>
       )}
 
-      <MDEditor
-        className='whitespace-pre-wrap'
-        value={value}
-        onChange={value => {
-          if (value === undefined) return;
-          setValue(value);
-        }}
-        height={400}
-        extraCommands={[]}
-        preview='edit'
-        hideToolbar={disabled}
-        textareaProps={{
-          id,
-          name: textAreaName,
-          disabled: disabled,
-        }}
-        previewOptions={{
-          rehypePlugins: [[rehypeSanitize]],
-          remarkPlugins: [[remarkGfm]],
-        }}
-      />
+      {mounted && (
+        <MDEditor
+          className='whitespace-pre-wrap'
+          value={value}
+          onChange={value => {
+            if (value === undefined) return;
+            setValue(value);
+          }}
+          height={400}
+          extraCommands={[]}
+          preview='edit'
+          hideToolbar={disabled}
+          textareaProps={{
+            id,
+            name: textAreaName,
+            disabled: disabled,
+          }}
+          previewOptions={{
+            rehypePlugins: [[rehypeSanitize]],
+            remarkPlugins: [[remarkGfm]],
+          }}
+        />
+      )}
     </div>
   );
 }

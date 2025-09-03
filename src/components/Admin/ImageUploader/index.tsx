@@ -1,3 +1,5 @@
+'use client';
+
 import { uploadImageAction } from '@/actions/upload/upload-image-action';
 import Button from '@/components/Button';
 import { ImageUpIcon } from 'lucide-react';

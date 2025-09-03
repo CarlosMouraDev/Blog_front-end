@@ -10,7 +10,6 @@ export const metadata: Metadata = {
     default: 'The blog - Feito com Next.js',
     template: '%s | The blog',
   },
-  description: 'Descrição da página.',
 };
 
 export default function RootLayout({

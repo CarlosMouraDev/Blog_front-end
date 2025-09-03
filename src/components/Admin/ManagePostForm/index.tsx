@@ -75,7 +75,26 @@ export function ManagePostForm(props: ManagePostFormProps) {
   }, [created]);
 
   const { formState } = state;
-  const [contentValue, setContentValue] = useState(publicPost?.content || '');
+
+  // Campos controlados
+  const [author, setAuthor] = useState(formState.author || '');
+  const [title, setTitle] = useState(formState.title || '');
+  const [excerpt, setExcerpt] = useState(formState.excerpt || '');
+  const [coverImageUrl, setCoverImageUrl] = useState(
+    formState.coverImageUrl || '',
+  );
+  const [published, setPublished] = useState(formState.published || false);
+  const [contentValue, setContentValue] = useState(formState.content || '');
+
+  // Atualiza campos controlados se formState mudar (ex: após submit)
+  useEffect(() => {
+    setAuthor(formState.author || '');
+    setTitle(formState.title || '');
+    setExcerpt(formState.excerpt || '');
+    setCoverImageUrl(formState.coverImageUrl || '');
+    setPublished(formState.published || false);
+    setContentValue(formState.content || '');
+  }, [formState]);
 
   return (
     <form action={action} className='mb-16'>
@@ -85,7 +104,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
           name='id'
           placeholder='Id gerado automaticamente'
           type='text'
-          defaultValue={formState.id}
+          value={formState.id}
           disabled={isPending}
           readOnly
         />
@@ -94,7 +113,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
           placeholder='Slug gerada automaticamente'
           name='slug'
           type='text'
-          defaultValue={formState.slug}
+          value={formState.slug}
           disabled={isPending}
           readOnly
         />
@@ -104,7 +123,8 @@ export function ManagePostForm(props: ManagePostFormProps) {
           placeholder='Digite o nome do autor do post'
           name='author'
           type='text'
-          defaultValue={formState.author}
+          value={author}
+          onChange={e => setAuthor(e.target.value)}
           disabled={isPending}
         />
 
@@ -113,7 +133,8 @@ export function ManagePostForm(props: ManagePostFormProps) {
           placeholder='Digite o título do post'
           name='title'
           type='text'
-          defaultValue={formState.title}
+          value={title}
+          onChange={e => setTitle(e.target.value)}
           disabled={isPending}
         />
 
@@ -122,7 +143,8 @@ export function ManagePostForm(props: ManagePostFormProps) {
           placeholder='Digite o resumo do post'
           name='excerpt'
           type='text'
-          defaultValue={formState.excerpt}
+          value={excerpt}
+          onChange={e => setExcerpt(e.target.value)}
           disabled={isPending}
         />
 
@@ -141,7 +163,8 @@ export function ManagePostForm(props: ManagePostFormProps) {
           labelText='URL da imagem de capa'
           placeholder='Digite a URL da imagem de capa'
           type='text'
-          defaultValue={formState.coverImageUrl}
+          value={coverImageUrl}
+          onChange={e => setCoverImageUrl(e.target.value)}
           disabled={isPending}
         />
 
@@ -149,7 +172,8 @@ export function ManagePostForm(props: ManagePostFormProps) {
           name='published'
           labelText='Publicar?'
           type='checkbox'
-          defaultChecked={formState.published}
+          checked={published}
+          onChange={e => setPublished(e.target.checked)}
           disabled={isPending}
         />
 

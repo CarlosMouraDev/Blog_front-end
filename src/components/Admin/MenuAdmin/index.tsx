@@ -1,20 +1,25 @@
 'use client';
 
+import { logoutAction } from '@/actions/login/logout-action';
 import clsx from 'clsx';
 import {
   CircleXIcon,
   FileTextIcon,
+  HourglassIcon,
   HouseIcon,
+  LogOutIcon,
   MenuIcon,
   PlusIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 
 export function MenuAdmin() {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname();
+
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     setIsOpen(false);
@@ -55,6 +60,14 @@ export function MenuAdmin() {
     'text-blue-200 italic sm:hidden',
   );
 
+  function handleLogout(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    e.preventDefault();
+
+    startTransition(async () => {
+      await logoutAction();
+    });
+  }
+
   return (
     <nav className={navClasses}>
       <button
@@ -86,6 +99,21 @@ export function MenuAdmin() {
         <PlusIcon />
         Criar post
       </Link>
+      <a onClick={handleLogout} href='#' className={linkClasses}>
+        {isPending && (
+          <>
+            <HourglassIcon />
+            Aguarde...
+          </>
+        )}
+
+        {!isPending && (
+          <>
+            <LogOutIcon />
+            Sair
+          </>
+        )}
+      </a>
     </nav>
   );
 }

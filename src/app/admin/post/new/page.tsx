@@ -1,8 +1,9 @@
 import { ManagePostForm } from '@/components/Admin/ManagePostForm';
+import { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Criar post',
   description: 'Página para criar um novo post no blog.',
 };
