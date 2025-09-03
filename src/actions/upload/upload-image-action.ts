@@ -1,5 +1,6 @@
 'use server';
 
+import { verifyLoginSession } from '@/lib/login/manage-login';
 import { mkdir, writeFile } from 'fs/promises';
 import { extname, resolve } from 'path';
 
@@ -11,7 +12,13 @@ type UploadImageActionResult = {
 export async function uploadImageAction(
   formData: FormData,
 ): Promise<UploadImageActionResult> {
+  const isAuthenticated = await verifyLoginSession();
+
   const makeResult = ({ url = '', error = '' }) => ({ url, error });
+
+  if (!isAuthenticated) {
+    return makeResult({ error: 'Faça login novamente em outra aba' });
+  }
 
   if (!(formData instanceof FormData)) {
     return makeResult({ error: 'Dados inválidos' });
