@@ -62,7 +62,7 @@ export async function verifyLoginSession() {
   return jwtPayload?.username === process.env.LOGIN_USER;
 }
 
-export async function requireLoginSession() {
+export async function requireLoginSessionOrRedirect() {
   const isAuthenticated = await getLoginSession();
 
   if (!isAuthenticated) {
