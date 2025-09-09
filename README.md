@@ -26,6 +26,10 @@ The project is designed to be simple, extensible, and developer-friendly.
 
 ---
 
+## ⚙️ Environment Variables
+
+Rename .env.local-EXAMPLE file to .env.local and edit the variables.
+
 ## 🛠️ Installation & Setup
 
 Follow the steps below to run the project from scratch:
@@ -52,7 +56,3 @@ npm run build
 # Start the production server (for testing)
 npm start
 ```
-
-## ⚙️ Environment Variables
-
-Rename .env.local-EXAMPLE file to .env.local and edit the variables.
