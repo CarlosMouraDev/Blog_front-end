@@ -56,3 +56,8 @@ npm run build
 # Start the production server (for testing)
 npm start
 ```
+
+## 🔨 Admin Page Access
+
+To access the admin page, go to /admin/login and insert the information you've
+put on the .env.local file.
